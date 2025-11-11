@@ -1,14 +1,23 @@
 ﻿#include <iostream>
-#include <math.h>
+#include <vector>
+#include <string>
 using namespace std;
 
 void lab1() {
     int m, n;
     cout << "введите число m: ";
-    cin >> m;
+    while (!(cin >> m)) {
+        cout << "Неверный ввод. Введите целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     cout << "введите число n: ";
-    cin >> n;
+    while (!(cin >> n)) {
+        cout << "Неверный ввод. Введите целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     if (m % n != 0) {
         cout << m << " на " << n << " нацело не делится" << endl;
@@ -23,8 +32,16 @@ void lab1() {
 void lab2() {
     int x, y;
     bool flag = false;
-    cin >> x;
-    cin >> y;
+    while (!(cin >> x)) {
+        cout << "Неверный ввод. Введите целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    while (!(cin >> y)) {
+        cout << "Неверный ввод. Введите целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     int res = 0;
     if ((x < 0 or y < 0) and not (x < 0 and y < 0)) {
         flag = true;
@@ -45,8 +62,12 @@ void lab3() {
     int y = 1;
     int factorial = 1;
     unsigned int n;
-    cout << "введите число n: ";
-    cin >> n;
+    cout << "Введите положительное целое число n: ";
+    while (!(cin >> n)) {
+        cout << "Неверный ввод. Введите положительное целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     for (unsigned int i = 1; i <= n; i++) {
         factorial *= i;
@@ -59,17 +80,29 @@ void lab3() {
 void lab4() {
     unsigned n;
     bool flag = false;
-    cout << "введите длину массива: ";
-    cin >> n;
+    cout << "Введите длину массива (минимально допустимая длина равна 3): ";
+    while (!(cin >> n)) {
+        cout << "Неверный ввод. Введите положительное целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     int* m{ new int[n] };
-    if (n < 3) {
-        cout << "длина массива меньше минимально допустимой длины" << endl;
-        return;
+    while (n < 3) {
+        cout << "Длина массива меньше минимально допустимой длины" << endl;
+        while (!(cin >> n)) {
+            cout << "Неверный ввод. Введите целое число.: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
-    cout << "введите элементы массива: \n";
+    cout << "Введите элементы массива: \n";
     for (int* num{ m }; num != m + n; num++) {
-        cin >> *num;
+        while (!(cin >> *num)) {
+            cout << "Неверный ввод. Введите целое число.: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
     for (unsigned i = 0; i < n - 2; i++) {
         if (m[i] == m[i + 1] == m[i + 2] == 0) {
@@ -77,10 +110,10 @@ void lab4() {
         }
     }
     if (flag == true) {
-        cout << "в массиве имеются 3 идущих подряд нулевых элементов" << endl;
+        cout << "В массиве имеются 3 идущих подряд нулевых элементов" << endl;
     }
     else {
-        cout << "в массиве нет трёх подряд идущих нулевых элементов" << endl;
+        cout << "В массиве нет трёх подряд идущих нулевых элементов" << endl;
     }
     delete[] m;
     m = nullptr;
@@ -91,13 +124,21 @@ void lab5() {
     unsigned n;
     bool flag = false;
     cout << "введите длину массива: ";
-    cin >> n;
+    while (!(cin >> n)) {
+        cout << "Неверный ввод. Введите положительное целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     int tmp;
     int* m{ new int[n] };
     cout << "введите элементы массива: \n";
     for (int* num{ m }; num != m + n; num++) {
-        cin >> *num;
+        while (!(cin >> *num)) {
+            cout << "Неверный ввод. Введите целое число.: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        };
     }
     for (unsigned i = 1; i < n; i++) {
         for (unsigned j = 0; j < i; j++) {
@@ -121,7 +162,11 @@ void lab5() {
 void lab6() {
     unsigned int n;
     cout << "введите размер матрицы: ";
-    cin >> n;
+    while (!(cin >> n)) {
+        cout << "Неверный ввод. Введите положительное целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     // инициализация матрицы
     int** matrix{ new int* [n] {} };
@@ -132,7 +177,11 @@ void lab6() {
     for (unsigned i{ 0 }; i < n; i++) {
         cout << "row " << i + 1 << ": \n";
         for (unsigned j{ 0 }; j < n; j++) {
-            cin >> matrix[i][j];
+            while (!(cin >> matrix[i][j])) {
+                cout << "Неверный ввод. Введите целое число.: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
         }
     }
     // Вывод введённой матрицы
@@ -162,7 +211,11 @@ void lab7() {
     unsigned int col;
     unsigned int row;
     cout << "введите размер матрицы в формате [ len_col len_row ]: ";
-    cin >> col >> row;
+    while (!(cin >> col >> row)) {
+        cout << "Неверный ввод. Введите положительные целые числа.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     // инициализация матрицы
     int** matrix{ new int* [col] {} };
@@ -173,7 +226,11 @@ void lab7() {
     for (unsigned i{ 0 }; i < col; i++) {
         cout << "row " << i + 1 << ": \n";
         for (unsigned j{ 0 }; j < row; j++) {
-            cin >> matrix[i][j];
+            while (!(cin >> matrix[i][j])) {
+                cout << "Неверный ввод. Введите целое число.: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
         }
     }
     // Вывод введённой матрицы
@@ -186,12 +243,20 @@ void lab7() {
     }
     unsigned int k;
     cout << "Введите номер строки для удаления: ";
-    cin >> k;
+    while (!(cin >> k)) {
+        cout << "Неверный ввод. Введите целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << endl;
     do {
         if (k > col) {
             cout << "В матирце нет строки с таким номером. Попробуйте ещё раз: ";
-            cin >> k;
+            while (!(cin >> k)) {
+                cout << "Неверный ввод. Введите целое число.: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
         }
     } while (k > col);
     unsigned int new_col = col - 1;
@@ -229,7 +294,11 @@ void lab7() {
 void lab8() {
     unsigned int n;
     cout << "введите размер матрицы: ";
-    cin >> n;
+    while (!(cin >> n)) {
+        cout << "Неверный ввод. Введите положительное целое число.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cout << "\n";
     // инициализация матрицы
     int** matrix{ new int* [n] {} };
@@ -240,7 +309,11 @@ void lab8() {
     for (unsigned i{ 0 }; i < n; i++) {
         cout << "row " << i + 1 << ": \n";
         for (unsigned j{ 0 }; j < n; j++) {
-            cin >> matrix[i][j];
+            while (!(cin >> matrix[i][j])) {
+                cout << "Неверный ввод. Введите целое число.: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
         }
     }
     // Вывод введённой матрицы
@@ -350,6 +423,69 @@ void lab8() {
     delete[] id_ordered_rows;
 }
 
+void lab9() {
+    cout << "Введите текст: ";
+    string a;
+    cin >> a;
+    string input_string;
+    getline(cin, input_string);
+    cout << endl;
+    input_string = a + input_string;
+    size_t len_is = input_string.length();
+    int space_count = 0;
+    for (size_t i = 0; i < len_is; i++) {
+        if (input_string[i] == ' ') {
+            space_count++;
+        }
+    }
+    string* words = new string[space_count+1];
+    string word = "";
+    size_t w_i = 0;
+    for (size_t is_i{}; is_i < len_is; is_i++) {
+        if (input_string[is_i] == ' ') {
+            words[w_i] = word;
+            word = "";
+            w_i++;
+        }
+        else {
+            word = word + input_string[is_i];
+        }
+    }
+    if (input_string[len_is - 1] != ' ') {
+        words[w_i] = word;
+    }
+    bool flag = true;
+    unsigned counter{};
+    vector<pair<string, unsigned>> list;
+    for (int i{}; i < space_count + 1; i++) {
+        flag = true;
+        if (list.size() == 0) {
+            flag = true;
+        }
+        else {
+            for (pair<string, unsigned> ptr : list) {
+                if (ptr.first == words[i]) {
+                    flag = false;
+                    break;
+                } 
+            }
+        }
+        if (flag) {
+            for (int j = i; j < space_count + 1; j++) {
+                if (words[i] == words[j]) {
+                    counter++; 
+                } 
+            }
+            list.push_back(pair<string, unsigned>{words[i], counter});
+            counter = 0;
+        }
+    }
+    for (pair<string, unsigned> ptr : list) {
+        if (ptr.second != 1) {cout << "Слово: " << ptr.first << "\tВстретилось: " << ptr.second << endl;}
+        
+    }
+}
+
 int main()
 {
     setlocale(LC_ALL, "Rus");
@@ -360,7 +496,7 @@ int main()
         if (no_lab == 0) {
             break;
         }
-        cout << "\n";
+        cout << endl;
         switch (no_lab)
         {
         case (1): { lab1(); break; }
@@ -371,6 +507,7 @@ int main()
         case (6): { lab6(); break; }
         case (7): { lab7(); break; }
         case (8): { lab8(); break; }
+        case (9): { lab9(); break; }
         }
     } while (no_lab != 0);
 }
