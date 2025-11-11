@@ -3,12 +3,14 @@
 #include <string>
 using namespace std;
 
+// Лабараторная работа No.1
 void lab1() {
+    // Ввод чисел
     int m, n;
     cout << "введите число m: ";
-    while (!(cin >> m)) {
-        cout << "Неверный ввод. Введите целое число.: ";
-        cin.clear();
+    while (!(cin >> m)) {                                   // Здесь и далее в программе
+        cout << "Неверный ввод. Введите целое число.: ";    // Проверка на дурака
+        cin.clear();                                        
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     cout << "\n";
@@ -19,6 +21,8 @@ void lab1() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     cout << "\n";
+    //
+    // Проверка делимости m на n нацело и вывод результата
     if (m % n != 0) {
         cout << m << " на " << n << " нацело не делится" << endl;
     }
@@ -28,8 +32,9 @@ void lab1() {
     }
     return;
 }
-
+// Лабараторная работа No.2
 void lab2() {
+    // Ввод двух целых чисел
     int x, y;
     bool flag = false;
     while (!(cin >> x)) {
@@ -42,6 +47,7 @@ void lab2() {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+    // Умножение числа на число
     int res = 0;
     if ((x < 0 or y < 0) and not (x < 0 and y < 0)) {
         flag = true;
@@ -54,14 +60,16 @@ void lab2() {
     if (flag == true) {
         res *= -1;
     }
+    // Вывод результата в консоль
     cout << res << endl;
     return;
 }
-
+// Лабараторная работа No.3
 void lab3() {
     int y = 1;
     int factorial = 1;
     unsigned int n;
+    // Ввод максимльного числа факториал которого надо взять
     cout << "Введите положительное целое число n: ";
     while (!(cin >> n)) {
         cout << "Неверный ввод. Введите положительное целое число.: ";
@@ -69,33 +77,32 @@ void lab3() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     cout << "\n";
+    // Вычисление суммы факториалов от 1 до n
     for (unsigned int i = 1; i <= n; i++) {
         factorial *= i;
         y += factorial;
     }
+    // Вывод результата в консоль
     cout << y << endl;
     return;
 }
-
+// Лабараторная работа No.4
 void lab4() {
+    // Ввод длины массива
     unsigned n;
     bool flag = false;
     cout << "Введите длину массива (минимально допустимая длина равна 3): ";
-    while (!(cin >> n)) {
-        cout << "Неверный ввод. Введите положительное целое число.: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-    cout << "\n";
-    int* m{ new int[n] };
-    while (n < 3) {
+    do {
         cout << "Длина массива меньше минимально допустимой длины" << endl;
         while (!(cin >> n)) {
             cout << "Неверный ввод. Введите целое число.: ";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-    }
+    } while (n < 3);
+    cout << "\n";
+    // Инициализация и заполнение массива
+    int* m{ new int[n] };
     cout << "Введите элементы массива: \n";
     for (int* num{ m }; num != m + n; num++) {
         while (!(cin >> *num)) {
@@ -104,11 +111,13 @@ void lab4() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
+    // Поиск 3х подряд идущих 0ых элементов
     for (unsigned i = 0; i < n - 2; i++) {
         if (m[i] == m[i + 1] == m[i + 2] == 0) {
             flag = true;
         }
     }
+    // Вывод результата
     if (flag == true) {
         cout << "В массиве имеются 3 идущих подряд нулевых элементов" << endl;
     }
@@ -119,8 +128,9 @@ void lab4() {
     m = nullptr;
     return;
 }
-
+// Лабараторная работа No.5
 void lab5() {
+    // Ввод длины массива
     unsigned n;
     bool flag = false;
     cout << "введите длину массива: ";
@@ -130,6 +140,7 @@ void lab5() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     cout << "\n";
+    // Инициализация и заполнения массива
     int tmp;
     int* m{ new int[n] };
     cout << "введите элементы массива: \n";
@@ -140,6 +151,7 @@ void lab5() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         };
     }
+    // Сортировка массива по убыванию
     for (unsigned i = 1; i < n; i++) {
         for (unsigned j = 0; j < i; j++) {
             if (m[i] > m[j]) {
@@ -149,6 +161,7 @@ void lab5() {
             }
         }
     }
+    // Вывод упорядоченного массива
     cout << "результат сортировки по убыванию: {";
     for (int* num{ m }; num != m + n - 1; num++) {
         cout << *num << ", ";
@@ -158,8 +171,9 @@ void lab5() {
     m = nullptr;
     return;
 }
-
+// Лабараторная работа No.6
 void lab6() {
+    // Ввод размера матрицы
     unsigned int n;
     cout << "введите размер матрицы: ";
     while (!(cin >> n)) {
@@ -168,12 +182,12 @@ void lab6() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     cout << "\n";
-    // инициализация матрицы
+    // Инициализация матрицы
     int** matrix{ new int* [n] {} };
     for (unsigned i = 0; i < n; i++) {
         matrix[i] = new int[n] {};
     }
-    // заполнение матрицы
+    // Заполнение матрицы
     for (unsigned i{ 0 }; i < n; i++) {
         cout << "row " << i + 1 << ": \n";
         for (unsigned j{ 0 }; j < n; j++) {
@@ -206,8 +220,9 @@ void lab6() {
     for (unsigned i{}; i < n; i++) { delete[] matrix[i]; }
     delete[] matrix;
 }
-
+// Лабараторная работа No.7
 void lab7() {
+    // Ввод размеров прямоугольной матрицы
     unsigned int col;
     unsigned int row;
     cout << "введите размер матрицы в формате [ len_col len_row ]: ";
@@ -236,11 +251,13 @@ void lab7() {
     // Вывод введённой матрицы
     cout << "Введённая матрица:\n";
     for (unsigned i{}; i < col; i++) {
+        cout << i+1 << ".\t";
         for (unsigned j{}; j < row; j++) {
             cout << matrix[i][j] << "\t";
         }
         cout << "\n";
     }
+    // Ввод номера строки для удаления
     unsigned int k;
     cout << "Введите номер строки для удаления: ";
     while (!(cin >> k)) {
@@ -250,7 +267,7 @@ void lab7() {
     }
     cout << endl;
     do {
-        if (k > col) {
+        if (k >= col) {
             cout << "В матирце нет строки с таким номером. Попробуйте ещё раз: ";
             while (!(cin >> k)) {
                 cout << "Неверный ввод. Введите целое число.: ";
@@ -258,7 +275,8 @@ void lab7() {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
         }
-    } while (k > col);
+    } while (k >= col);
+    // Создание копии матрицы с отсутствующей строкой
     unsigned int new_col = col - 1;
     int** new_matrix{ new int* [new_col] {} };
     for (unsigned i = 0; i < new_col; i++) {
@@ -278,6 +296,7 @@ void lab7() {
 
         }
     }
+    // Вывод полученной матрицы
     cout << "Полученная матрица: " << endl;
     for (unsigned i{}; i < new_col; i++) {
         for (unsigned j{}; j < row; j++) {
@@ -291,7 +310,9 @@ void lab7() {
     delete[] new_matrix;
 
 }
+// Лабараторная работа No.8
 void lab8() {
+    // Ввод размера квадратной матрицы
     unsigned int n;
     cout << "введите размер матрицы: ";
     while (!(cin >> n)) {
@@ -324,14 +345,17 @@ void lab8() {
         }
         cout << "\n";
     }
+    // Поиск упорядоченных строк
     bool flag = true;
     int tmp;
     int* id_ordered_rows = new int[n];
     for (unsigned i = 0; i < n; i++) {
         int* ordered_row = new int[n];
+        // создание копии строки
         for (unsigned j = 0; j < n; j++) {
             ordered_row[j] = matrix[i][j];
         }
+        // сортировка копии строки по убыванию
         for (unsigned or_i = 1; or_i < n; or_i++) {
             for (unsigned or_j = 0; or_j < or_i; or_j++) {
                 if (ordered_row[or_i] > ordered_row[or_j]) {
@@ -341,6 +365,7 @@ void lab8() {
                 }
             }
         }
+        // сравнение полученной строки с строкой в матрице
         for (unsigned j = 0; j < n; j++) {
             if (ordered_row[j] == matrix[i][j]) {
                 flag = true;
@@ -354,6 +379,7 @@ void lab8() {
             id_ordered_rows[i] = i;
         }
         else {
+            // сортировка копии строки по возрастанию
             for (unsigned or_i = 1; or_i < n; or_i++) {
                 for (unsigned or_j = 0; or_j < or_i; or_j++) {
                     if (ordered_row[or_i] < ordered_row[or_j]) {
@@ -363,6 +389,7 @@ void lab8() {
                     }
                 }
             }
+            // сравнение полученной строки с строкой в матрице
             for (unsigned j = 0; j < n; j++) {
                 if (ordered_row[j] == matrix[i][j]) {
                     flag = true;
@@ -372,6 +399,7 @@ void lab8() {
                     break;
                 }
             }
+            // запись результата сравнения в массив с индексами упорядоченных строк
             if (flag) {
                 id_ordered_rows[i] = i;
             }
@@ -380,8 +408,10 @@ void lab8() {
                 continue;
             }
         }
+        // отчистка копии строки
         delete[] ordered_row;
     }
+    // вычисление длины столбца матрицы содержащей только упорядоченные строки
     unsigned counter = 0;
     for (unsigned i = 0; i < n; i++) {
         if (id_ordered_rows[i] != n + 1) {
@@ -389,6 +419,7 @@ void lab8() {
         }
     }
     if (counter != 0) {
+        // сборка матрицы содержащей только упорядоченные строки
         int** only_ordered_rows = new int* [counter];
         for (unsigned i = 0; i < counter; i++) {
             only_ordered_rows[i] = new int[n];
@@ -403,6 +434,7 @@ void lab8() {
             }
 
         }
+        // поиск минимального элемента матрицы содержащей только упорядоченные строки
         int min_oor = only_ordered_rows[0][0];
         for (unsigned i = 0; i < counter; i++) {
             for (unsigned j = 0; j < n; j++) {
@@ -422,7 +454,7 @@ void lab8() {
     delete[] matrix;
     delete[] id_ordered_rows;
 }
-
+// Лабараторная работа No.9
 void lab9() {
     cout << "Введите текст: ";
     string a;
@@ -511,6 +543,3 @@ int main()
         }
     } while (no_lab != 0);
 }
-
-
-
