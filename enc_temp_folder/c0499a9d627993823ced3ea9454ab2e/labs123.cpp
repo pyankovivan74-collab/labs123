@@ -30,7 +30,6 @@ void lab1() {
         cout << "result: ";
         cout << m / n << endl;
     }
-    system("pause");
     return;
 }
 // Лабараторная работа No.2
@@ -63,7 +62,6 @@ void lab2() {
     }
     // Вывод результата в консоль
     cout << res << endl;
-    system("pause");
     return;
 }
 // Лабараторная работа No.3
@@ -86,7 +84,6 @@ void lab3() {
     }
     // Вывод результата в консоль
     cout << y << endl;
-    system("pause");
     return;
 }
 // Лабараторная работа No.4
@@ -129,7 +126,7 @@ void lab4() {
     }
     delete[] m;
     m = nullptr;
-    system("pause");
+    return;
 }
 // Лабараторная работа No.5
 void lab5() {
@@ -173,7 +170,6 @@ void lab5() {
     delete[] m;
     m = nullptr;
     return;
-    system("pause");
 }
 // Лабараторная работа No.6
 void lab6() {
@@ -223,7 +219,6 @@ void lab6() {
     // Удаление матрицы
     for (unsigned i{}; i < n; i++) { delete[] matrix[i]; }
     delete[] matrix;
-    system("pause");
 }
 // Лабараторная работа No.7
 void lab7() {
@@ -313,7 +308,7 @@ void lab7() {
     delete[] matrix;
     for (unsigned i{}; i < new_col; i++) { delete[] new_matrix[i]; }
     delete[] new_matrix;
-    system("pause");
+
 }
 // Лабараторная работа No.8
 void lab8() {
@@ -458,7 +453,6 @@ void lab8() {
     for (unsigned i{}; i < n; i++) { delete[] matrix[i]; }
     delete[] matrix;
     delete[] id_ordered_rows;
-    system("pause");
 }
 // Лабараторная работа No.9
 void lab9() {
@@ -526,7 +520,6 @@ void lab9() {
         if (ptr.second != 1) {cout << "Слово: " << ptr.first << "\tВстретилось: " << ptr.second << endl;}
         
     }
-    system("pause");
 }
 
 void lab10() {
