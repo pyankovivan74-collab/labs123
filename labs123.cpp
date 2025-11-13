@@ -209,19 +209,30 @@ void lab6() {
             cout << matrix[i][j] << "\t";
         }
         cout << "\n";
-    }
+    }\
     // Проверка на симметричность
-    for (unsigned i{}; i < n - 1; i++) {
-        for (unsigned j{}; j < n - 1; j++) {
-            if (matrix[i][n - 1 - j] != matrix[n - 1 - i][j]) {
-                cout << "Матрица не симметрична относительно главной диагонали.\n";
-                return;
+    bool isSymmetric = true;
+    for (unsigned i = 0; i < n; i++) {
+        for (unsigned j = i + 1; j < n; j++) { 
+            if (matrix[i][j] != matrix[j][i]) {
+                isSymmetric = false;
+                break;
             }
         }
+        if (!isSymmetric) break;
     }
-    cout << "Матрица симметрична относительно главной диагонали.\n";
+
+    if (isSymmetric) {
+        cout << "Матрица симметрична относительно главной диагонали.\n";
+    }
+    else {
+        cout << "Матрица не симметрична относительно главной диагонали.\n";
+    }
+
     // Удаление матрицы
-    for (unsigned i{}; i < n; i++) { delete[] matrix[i]; }
+    for (unsigned i{}; i < n; i++) {
+        delete[] matrix[i];
+    }
     delete[] matrix;
     system("pause");
 }
