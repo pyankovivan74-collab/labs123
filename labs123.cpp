@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
 using namespace std;
 
 // Лабараторная работа No.1
@@ -50,17 +51,21 @@ void lab2() {
     }
     // Умножение числа на число
     int res = 0;
-    if ((x < 0 or y < 0) and not (x < 0 and y < 0)) {
-        flag = true;
+    int sign = 1;
+    if (x < 0) {
+        sign = -sign;
+        x = -x;
+    }
+    if (y < 0) {
+        sign = -sign;
+        y = -y;
     }
     x = abs(x);
     y = abs(y);
     for (int i = 1; i <= x; i++) {
         res += y;
     }
-    if (flag == true) {
-        res *= -1;
-    }
+    res *= sign;
     // Вывод результата в консоль
     cout << res << endl;
     system("pause");
@@ -106,27 +111,36 @@ void lab4() {
     cout << "\n";
     // Инициализация и заполнение массива
     int* m{ new int[n] };
-    cout << "Введите элементы массива: \n";
-    for (int* num{ m }; num != m + n; num++) {
-        while (!(cin >> *num)) {
-            cout << "Неверный ввод. Введите целое число.: ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Введите 0, если хотите заполнить массив сами, или 1, если хотите заполнить массив рандомными значениями." << endl;
+    bool rand_or_not;
+    while (!(cin >> rand_or_not)) {
+        cout << "Неверный ввод. Введите 1 или 0.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    if (!rand_or_not) {
+        for (unsigned i{ 0 }; i < n; i++) {
+            while (!(cin >> m[i])) {
+                cout << "Неверный ввод. Введите целое число.: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }
+    }
+    else {
+        srand(time({}));
+        for (unsigned i{ 0 }; i < n; i++) {
+            m[i] = rand();
         }
     }
     // Поиск 3х подряд идущих 0ых элементов
     for (unsigned i = 0; i < n - 2; i++) {
         if (m[i] == m[i + 1] == m[i + 2] == 0) {
-            flag = true;
+            cout << "В массиве имеются 3 идущих подряд нулевых элементов" << endl;
+            return;
         }
     }
-    // Вывод результата
-    if (flag == true) {
-        cout << "В массиве имеются 3 идущих подряд нулевых элементов" << endl;
-    }
-    else {
-        cout << "В массиве нет трёх подряд идущих нулевых элементов" << endl;
-    }
+    cout << "В массиве нет трёх подряд идущих нулевых элементов" << endl;
     delete[] m;
     m = nullptr;
     system("pause");
@@ -145,14 +159,28 @@ void lab5() {
     cout << "\n";
     // Инициализация и заполнения массива
     int tmp;
-    int* m{ new int[n] };
-    cout << "введите элементы массива: \n";
-    for (int* num{ m }; num != m + n; num++) {
-        while (!(cin >> *num)) {
-            cout << "Неверный ввод. Введите целое число.: ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        };
+    int* m = new int[n];
+    cout << "Введите 0, если хотите заполнить массив сами, или 1, если хотите заполнить массив рандомными значениями." << endl;
+    bool rand_or_not;
+    while (!(cin >> rand_or_not)) {
+        cout << "Неверный ввод. Введите 1 или 0.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    if (!rand_or_not) {
+        for (unsigned i{ 0 }; i < n; i++) {
+            while (!(cin >> m[i])) {
+                cout << "Неверный ввод. Введите целое число.: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }
+    }
+    else {
+        srand(time({}));
+        for (unsigned i{ 0 }; i < n; i++) {
+            m[i] = rand();
+        }
     }
     // Сортировка массива по убыванию
     for (unsigned i = 1; i < n; i++) {
@@ -192,13 +220,31 @@ void lab6() {
         matrix[i] = new int[n] {};
     }
     // Заполнение матрицы
-    for (unsigned i{ 0 }; i < n; i++) {
-        cout << "row " << i + 1 << ": \n";
-        for (unsigned j{ 0 }; j < n; j++) {
-            while (!(cin >> matrix[i][j])) {
-                cout << "Неверный ввод. Введите целое число.: ";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Введите 0, если хотите заполнить матрицу сами, или 1, если хотите заполнить матрицу рандомными значениями." << endl;
+    bool rand_or_not;
+    while (!(cin >> rand_or_not)) {
+        cout << "Неверный ввод. Введите 1 или 0.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    if (!rand_or_not) {
+
+        for (unsigned i{ 0 }; i < n; i++) {
+            cout << "row " << i + 1 << ": \n";
+            for (unsigned j{ 0 }; j < n; j++) {
+                while (!(cin >> matrix[i][j])) {
+                    cout << "Неверный ввод. Введите целое число.: ";
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            }
+        }
+    }
+    else {
+        srand(time({}));
+        for (unsigned i{ 0 }; i < n; i++) {
+            for (unsigned j{ 0 }; j < n; j++) {
+                matrix[i][j] = rand();
             }
         }
     }
@@ -209,7 +255,7 @@ void lab6() {
             cout << matrix[i][j] << "\t";
         }
         cout << "\n";
-    }\
+    }
     // Проверка на симметричность
     bool isSymmetric = true;
     for (unsigned i = 0; i < n; i++) {
@@ -254,13 +300,31 @@ void lab7() {
         matrix[i] = new int[row] {};
     }
     // заполнение матрицы
-    for (unsigned i{ 0 }; i < col; i++) {
-        cout << "row " << i + 1 << ": \n";
-        for (unsigned j{ 0 }; j < row; j++) {
-            while (!(cin >> matrix[i][j])) {
-                cout << "Неверный ввод. Введите целое число.: ";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Введите 0, если хотите заполнить матрицу сами, или 1, если хотите заполнить матрицу рандомными значениями." << endl;
+    bool rand_or_not;
+    while (!(cin >> rand_or_not)) {
+        cout << "Неверный ввод. Введите 1 или 0.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    if (!rand_or_not) {
+        
+        for (unsigned i{ 0 }; i < col; i++) {
+            cout << "row " << i + 1 << ": \n";
+            for (unsigned j{ 0 }; j < row; j++) {
+                while (!(cin >> matrix[i][j])) {
+                    cout << "Неверный ввод. Введите целое число.: ";
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            }
+        }
+    }
+    else {
+        srand(time({}));
+        for (unsigned i{ 0 }; i < col; i++) {
+            for (unsigned j{ 0 }; j < row; j++) {
+                matrix[i][j] = rand();
             }
         }
     }
@@ -291,6 +355,7 @@ void lab7() {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
         }
+        
     } while (k >= col);
     // Создание копии матрицы с отсутствующей строкой
     unsigned int new_col = col - 1;
@@ -304,10 +369,10 @@ void lab7() {
         }
         for (unsigned j{ 0 }; j < row; j++) {
             if (i > k - 1) {
-                new_matrix[i - 1][j] = matrix[i][j];
+                swap(new_matrix[i - 1][j], matrix[i][j]);
             }
             else {
-                new_matrix[i][j] = matrix[i][j];
+                swap(new_matrix[i][j], matrix[i][j]);
             }
 
         }
@@ -343,13 +408,31 @@ void lab8() {
         matrix[i] = new int[n] {};
     }
     // заполнение матрицы
-    for (unsigned i{ 0 }; i < n; i++) {
-        cout << "row " << i + 1 << ": \n";
-        for (unsigned j{ 0 }; j < n; j++) {
-            while (!(cin >> matrix[i][j])) {
-                cout << "Неверный ввод. Введите целое число.: ";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Введите 0, если хотите заполнить матрицу сами, или 1, если хотите заполнить матрицу рандомными значениями." << endl;
+    bool rand_or_not;
+    while (!(cin >> rand_or_not)) {
+        cout << "Неверный ввод. Введите 1 или 0.: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    if (!rand_or_not) {
+
+        for (unsigned i{ 0 }; i < n; i++) {
+            cout << "row " << i + 1 << ": \n";
+            for (unsigned j{ 0 }; j < n; j++) {
+                while (!(cin >> matrix[i][j])) {
+                    cout << "Неверный ввод. Введите целое число.: ";
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            }
+        }
+    }
+    else {
+        srand(time({}));
+        for (unsigned i{ 0 }; i < n; i++) {
+            for (unsigned j{ 0 }; j < n; j++) {
+                matrix[i][j] = rand();
             }
         }
     }
